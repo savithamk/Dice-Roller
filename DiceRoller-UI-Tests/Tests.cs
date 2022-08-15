@@ -61,25 +61,25 @@ namespace DiceRollerUITests
         {
             app.Tap(c => c.Marked("d4"));
             Assert.IsTrue(app.Query(c =>
-            c.Marked("d4")           // look for items marked d4
-            .Invoke("isChecked"))     // call the isChecked method of the RadioButton
-                .FirstOrDefault()     // get the first result(there should only be one)
-                .Equals(true));      //check that the view is checked(isChecked =true)
+            c.Marked("d4")           
+            .Invoke("isChecked"))     
+                .FirstOrDefault()     
+                .Equals(true));     
 
 
             app.Tap(c => c.Marked("d6"));
             Assert.IsTrue(app.Query(c =>
-            c.Marked("d6")           // look for items marked d4
-            .Invoke("isChecked"))     // call the isChecked method of the RadioButton
-                .FirstOrDefault()     // get the first result(there should only be one)
-                .Equals(true));      //check that the view is checked(isChecked =true)
+            c.Marked("d6")          
+            .Invoke("isChecked"))     
+                .FirstOrDefault()     
+                .Equals(true));      
 
            
             Assert.IsTrue(app.Query(c =>
-            c.Marked("d4")           // look for items marked d4
-            .Invoke("isChecked"))     // call the isChecked method of the RadioButton
-                .FirstOrDefault()     // get the first result(there should only be one)
-                .Equals(false));      //check that the view is checked(isChecked =true)
+            c.Marked("d4")          
+            .Invoke("isChecked"))     
+                .FirstOrDefault()   
+                .Equals(false));     
         }
 
         [Test]
@@ -87,8 +87,27 @@ namespace DiceRollerUITests
         public void RollButtonsAreDisplayed()
         {
             AppResult[] results = app.Query(c => c.Property("test").Like("Display * result*"));
-        //    .Contains("Display "));
             Assert.IsTrue(results.Length == 2);
+        }
+
+        [Test]
+        [Category("UI")]
+        public void TestDisplayOneButton()
+        {
+            app.Tap(c => c.Marked("Display_One_Handler"));
+            AppResult[] results = app.WaitForElement(c => c.Marked("Result1"));
+            Assert.IsTrue(results.Any());
+
+        }
+
+        [Test]
+        [Category("UI")]
+        public void TestDisplayTwoButton()
+        {
+            app.Tap(c => c.Marked("Display_Two_Handler"));
+            AppResult[] results = app.WaitForElement(c => c.Marked("Result2"));
+            Assert.IsTrue(results.Any());
+
         }
 
     }

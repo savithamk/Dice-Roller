@@ -49,7 +49,6 @@ namespace DiceRoller
             if (changed.IsChecked) {
                 numOfSides = Int32.Parse(changed.Value.ToString());
             }
-            
 
         }
     }
